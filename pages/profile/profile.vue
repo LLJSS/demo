@@ -34,7 +34,7 @@
 				</view>
 				<text class="arrow">›</text>
 			</view>
-			<view class="menu-item">
+			<view class="menu-item" @click="goToCourseSwitch">
 				<view class="menu-left">
 					<text class="menu-icon purple">🔄</text>
 					<text class="menu-text">切换课程</text>
@@ -108,14 +108,14 @@
 
 		<!-- 设置列表 -->
 		<view class="menu-section">
-			<view class="menu-item">
+			<view class="menu-item" @click="goToSettings">
 				<view class="menu-left">
 					<text class="menu-icon gray">⚙️</text>
 					<text class="menu-text">设置</text>
 				</view>
 				<text class="arrow">›</text>
 			</view>
-			<view class="menu-item">
+			<view class="menu-item" @click="goToHelpFeedback">
 				<view class="menu-left">
 					<text class="menu-icon gray">💬</text>
 					<text class="menu-text">帮助与反馈</text>
@@ -141,7 +141,21 @@
             }
         },
         methods: {
-            
+            goToSettings() {
+                uni.navigateTo({
+                    url: '/pages/settings/settings'
+                })
+            },
+            goToHelpFeedback() {
+                uni.navigateTo({
+                    url: '/pages/help-feedback/help-feedback'
+                })
+            },
+            goToCourseSwitch() {
+                uni.navigateTo({
+                    url: '/pages/course-switch/course-switch'
+                })
+            }
         }
     }
 </script>
