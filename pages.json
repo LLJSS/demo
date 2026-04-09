@@ -17,6 +17,30 @@
             "style": {
                 "navigationBarTitleText": "个人中心"
             }
+        },
+        {
+            "path": "pages/settings/settings",
+            "style": {
+                "navigationBarTitleText": "设置"
+            }
+        },
+        {
+            "path": "pages/profile-edit/profile-edit",
+            "style": {
+                "navigationBarTitleText": "个人信息"
+            }
+        },
+        {
+            "path": "pages/help-feedback/help-feedback",
+            "style": {
+                "navigationBarTitleText": "帮助与反馈"
+            }
+        },
+        {
+            "path": "pages/course-switch/course-switch",
+            "style": {
+                "navigationBarTitleText": "切换课程"
+            }
         }
 	],
 	"globalStyle": {

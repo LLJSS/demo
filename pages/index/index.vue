@@ -134,14 +134,15 @@ export default {
 <style>
 /* 页面一屏布局 */
 .home-page {
-    height: 100vh;
+    height: 87vh;
     background: linear-gradient(180deg, #ff8c42, #ff6b35);
     padding: 50rpx 30rpx;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
+    top: 0;
+    left: 0;
 }
 
 /* 用户卡片 */
