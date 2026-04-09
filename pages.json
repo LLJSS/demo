@@ -41,7 +41,18 @@
             "style": {
                 "navigationBarTitleText": "切换课程"
             }
+<<<<<<< Updated upstream
         }
+=======
+        },
+		{
+		    "path": "pages/login/login",
+		    "style": {
+		        "navigationBarTitleText": "登录页面",
+				"navigationStyle": "custom"
+		    }
+		}
+>>>>>>> Stashed changes
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
