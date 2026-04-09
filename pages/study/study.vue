@@ -12,7 +12,7 @@
                     </view>
                 </view>
                 <view class="icon-box">
-                    <text class="icon">📊</text>
+                    <image src="/static/logo.png" class="top-logo"></image>
                 </view>
             </view>
 
@@ -32,7 +32,7 @@
         <view class="intro-card">
             <view class="card-header">
                 <view class="header-icon">
-                    <text class="icon-num">1</text>
+                    <image src="/static/icon/introduction.png" class="intro-icon"></image>
                 </view>
                 <text class="header-title">项目介绍</text>
             </view>
@@ -76,8 +76,8 @@
                 <text class="header-title">第{{currentLevel}}关 · 需求分析</text>
             </view>
             
-            <!-- 关卡具体功能 -->
-            <view class="step-title">关卡具体功能</view>
+            <!-- 关卡步骤 -->
+            <view class="step-title">关卡步骤</view>
 
             <!-- 步骤列表（最后一步为作业） -->
             <view class="step-list">
@@ -96,15 +96,18 @@
                                 <text class="chat-toggle" :class="{rotate: item.isChatOpen}">▼</text>
                             </view>
                             <view class="chat-content" v-if="item.isChatOpen">
-                                <view class="chat-bubble.server" v-for="(msg, msgIndex) in item.chatRecords" :key="msgIndex">
-                                    <view class="avatar">💬</view>
+                                <!-- 机器人消息 - 左侧 -->
+                                <view class="chat-bubble robot" v-for="(msg, msgIndex) in item.chatRecords" :key="msgIndex">
+                                    <image src="/static/icon/communication_robot.png" class="chat-avatar"></image>
                                     <view class="message">
                                         <text class="msg-content">{{msg.content}}</text>
                                         <text class="msg-time">{{msg.time}}</text>
                                     </view>
                                 </view>
-                                <view class="chat-bubble.user" v-for="(msg, msgIndex) in item.userChatRecords" :key="msgIndex">
-                                    <view class="message">
+                                <!-- 用户消息 - 右侧 -->
+                                <view class="chat-bubble user" v-for="(msg, msgIndex) in item.userChatRecords" :key="msgIndex">
+                                    <image src="/static/icon/communication_user.png" class="chat-avatar"></image>
+									<view class="message">
                                         <text class="msg-content">{{msg.content}}</text>
                                         <text class="msg-time">{{msg.time}}</text>
                                     </view>
@@ -258,8 +261,10 @@ export default {
     align-items: center;
     justify-content: center;
 }
-.icon {
-    font-size: 50rpx;
+.top-logo {
+    width: 60rpx;
+    height: 60rpx;
+    object-fit: contain;
 }
 .progress-section {
     margin-top: 20rpx;
@@ -296,17 +301,16 @@ export default {
 .header-icon {
     width: 40rpx;
     height: 40rpx;
-    background-color: #ff9a56;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 15rpx;
 }
-.icon-num {
-    color: #fff;
-    font-size: 24rpx;
-    font-weight: bold;
+.intro-icon {
+    width: 35rpx;
+    height: 35rpx;
+    object-fit: contain;
 }
 .header-title {
     font-size: 32rpx;
@@ -314,6 +318,7 @@ export default {
     color: #333;
 }
 .intro-text {
+	display: block;
     font-size: 26rpx;
     color: #666;
     line-height: 1.8;
@@ -523,51 +528,60 @@ export default {
 .chat-content {
     margin-top: 15rpx;
 }
+
+/* 聊天气泡样式 */
 .chat-bubble {
     display: flex;
-    margin-bottom: 15rpx;
-    max-width: 85%;
+    align-items: flex-start;
+    margin-bottom: 20rpx;
+    max-width: 80%;
 }
-.chat-bubble.server {
+/* 机器人 - 左侧 */
+.chat-bubble.robot {
     flex-direction: row;
+    margin-right: auto;
 }
+/* 用户 - 右侧 */
 .chat-bubble.user {
     flex-direction: row-reverse;
     margin-left: auto;
 }
-.avatar {
+/* 头像 */
+.chat-avatar {
     width: 40rpx;
     height: 40rpx;
-    background: #f5f5f5;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10rpx;
     flex-shrink: 0;
+    margin: 0 8rpx;
+    object-fit: cover;
 }
+/* 消息气泡 */
 .message {
-    background: #f8f9fa;
-    border-radius: 12rpx;
-    padding: 15rpx 20rpx;
+    padding: 18rpx 20rpx;
+    border-radius: 16rpx;
+    font-size: 26rpx;
+    line-height: 1.5;
     position: relative;
 }
-.chat-bubble.user .message {
-    background: #e0f7fa;
-}
-.msg-content {
-    font-size: 24rpx;
+/* 机器人气泡 */
+.chat-bubble.robot .message {
+    background-color: #f1f1f1;
     color: #333;
-    line-height: 1.5;
-    display: block;
 }
+/* 用户气泡 */
+.chat-bubble.user .message {
+    background-color: #d1e7ff;
+    color: #333;
+}
+/* 时间 */
 .msg-time {
     font-size: 20rpx;
     color: #999;
     display: block;
-    margin-top: 5rpx;
+    margin-top: 6rpx;
     text-align: right;
 }
+
 .robot-eval-section {
     margin-top: 30rpx;
     padding: 25rpx;

@@ -14,21 +14,21 @@
 		<view class="menu-section">
 			<view class="menu-item">
 				<view class="menu-left">
-					<view class="menu-icon blue-bg">🔔</view>
+					<image class="menu-img" src="/static/icon/tip.png"></image>
 					<text class="menu-text">消息通知</text>
 				</view>
 				<switch :checked="true" color="#52c41a" />
 			</view>
 			<view class="menu-item">
 				<view class="menu-left">
-					<view class="menu-icon purple-bg">🔒</view>
+					<image class="menu-img" src="/static/icon/password.png"></image>
 					<text class="menu-text">账号安全</text>
 				</view>
 				<text class="arrow">›</text>
 			</view>
 			<view class="menu-item">
 				<view class="menu-left">
-					<view class="menu-icon orange-bg">🎨</view>
+					<image class="menu-img" src="/static/icon/theme.png"></image>
 					<text class="menu-text">主题设置</text>
 				</view>
 				<view class="menu-right">
@@ -42,21 +42,21 @@
 		<view class="menu-section">
 			<view class="menu-item">
 				<view class="menu-left">
-					<view class="menu-icon gray-bg">💬</view>
+					<image class="menu-img" src="/static/icon/help.png"></image>
 					<text class="menu-text">帮助与反馈</text>
 				</view>
 				<text class="arrow">›</text>
 			</view>
 			<view class="menu-item">
 				<view class="menu-left">
-					<view class="menu-icon gray-bg">📄</view>
+					<image class="menu-img" src="/static/icon/user_ agreement.png"></image>
 					<text class="menu-text">用户协议</text>
 				</view>
 				<text class="arrow">›</text>
 			</view>
 			<view class="menu-item">
 				<view class="menu-left">
-					<view class="menu-icon gray-bg">🛡️</view>
+					<image class="menu-img" src="/static/icon/privacy_ policy.png"></image>
 					<text class="menu-text">隐私政策</text>
 				</view>
 				<text class="arrow">›</text>
@@ -171,31 +171,13 @@
 		align-items: center;
 	}
 
-	.menu-icon {
-		width: 60rpx;
-		height: 60rpx;
-		border-radius: 12rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 30rpx;
+	/* 菜单图标统一尺寸 */
+	.menu-img {
+		width: 36rpx;
+		height: 36rpx;
+		object-fit: contain;
 		margin-right: 20rpx;
-	}
-
-	.menu-icon.blue-bg {
-		background: #e6f3ff;
-	}
-
-	.menu-icon.purple-bg {
-		background: #f0e6ff;
-	}
-
-	.menu-icon.orange-bg {
-		background: #fff0e6;
-	}
-
-	.menu-icon.gray-bg {
-		background: #f5f5f5;
+		flex-shrink: 0;
 	}
 
 	.menu-text {
