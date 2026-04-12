@@ -3,7 +3,11 @@
 		<!-- 搜索栏 -->
 		<view class="search-section">
 			<view class="search-box">
+<<<<<<< HEAD
 				<text class="search-icon">🔍</text>
+=======
+				<image class="search-img" src="/static/icon/search.png"></image>
+>>>>>>> main
 				<input class="search-input" placeholder="搜索常见问题" v-model="searchText" />
 			</view>
 		</view>
@@ -24,17 +28,29 @@
 			<text class="section-title">联系我们</text>
 			<view class="contact-card">
 				<view class="contact-item">
+<<<<<<< HEAD
 					<view class="contact-icon blue">🎧</view>
+=======
+					<image class="contact-img" src="/static/icon/customer_ service.png"></image>
+>>>>>>> main
 					<view class="contact-info">
 						<text class="contact-name">在线客服</text>
 						<text class="contact-time">工作日 9:00-21:00</text>
 					</view>
+<<<<<<< HEAD
 					<view class="contact-btn blue-btn">
+=======
+					<view class="contact-btn gradient-btn">
+>>>>>>> main
 						<text class="btn-text">咨询</text>
 					</view>
 				</view>
 				<view class="contact-item">
+<<<<<<< HEAD
 					<view class="contact-icon green">💚</view>
+=======
+					<image class="contact-img" src="/static/icon/public_ account.png"></image>
+>>>>>>> main
 					<view class="contact-info">
 						<text class="contact-name">官方公众号</text>
 						<text class="contact-time">微信搜索：编程少年</text>
@@ -59,7 +75,11 @@
 					</view>
 					<text class="upload-hint">添加图片（可选）</text>
 				</view>
+<<<<<<< HEAD
 				<view class="submit-btn" @click="submitFeedback">
+=======
+				<view class="submit-btn gradient-btn" @click="submitFeedback">
+>>>>>>> main
 					<text class="submit-text">提交反馈</text>
 				</view>
 			</view>
@@ -136,8 +156,15 @@
 		align-items: center;
 	}
 
+<<<<<<< HEAD
 	.search-icon {
 		font-size: 32rpx;
+=======
+	.search-img {
+		width: 32rpx;
+		height: 32rpx;
+		object-fit: contain;
+>>>>>>> main
 		margin-right: 15rpx;
 	}
 
@@ -212,6 +239,7 @@
 		border-bottom: none;
 	}
 
+<<<<<<< HEAD
 	.contact-icon {
 		width: 80rpx;
 		height: 80rpx;
@@ -229,6 +257,14 @@
 
 	.contact-icon.green {
 		background: #e6fff0;
+=======
+	.contact-img {
+		width: 40rpx;
+		height: 40rpx;
+		object-fit: contain;
+		margin-right: 20rpx;
+		flex-shrink: 0;
+>>>>>>> main
 	}
 
 	.contact-info {
@@ -249,15 +285,26 @@
 		color: #999999;
 	}
 
+<<<<<<< HEAD
+=======
+	/* 渐变按钮 */
+	.gradient-btn {
+		background: linear-gradient(90deg, #F97316, #EF4444);
+	}
+
+>>>>>>> main
 	.contact-btn {
 		padding: 12rpx 30rpx;
 		border-radius: 30rpx;
 	}
 
+<<<<<<< HEAD
 	.contact-btn.blue-btn {
 		background: #409eff;
 	}
 
+=======
+>>>>>>> main
 	.btn-text {
 		font-size: 26rpx;
 		color: #ffffff;
@@ -274,14 +321,25 @@
 		padding: 30rpx;
 	}
 
+<<<<<<< HEAD
 	.feedback-textarea {
 		width: 100%;
+=======
+	/* 修复：意见反馈宽度缩短 */
+	.feedback-textarea {
+		width: calc(100% - 40rpx);
+>>>>>>> main
 		min-height: 200rpx;
 		padding: 20rpx;
 		background: #f5f5f5;
 		border-radius: 15rpx;
 		font-size: 28rpx;
+<<<<<<< HEAD
 		margin-bottom: 30rpx;
+=======
+		margin: 0 auto 30rpx;
+		box-sizing: border-box;
+>>>>>>> main
 	}
 
 	.image-upload {
@@ -312,7 +370,10 @@
 	}
 
 	.submit-btn {
+<<<<<<< HEAD
 		background: linear-gradient(to right, #667eea, #764ba2);
+=======
+>>>>>>> main
 		border-radius: 50rpx;
 		padding: 25rpx;
 		text-align: center;
@@ -323,4 +384,8 @@
 		color: #ffffff;
 		font-weight: bold;
 	}
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> main

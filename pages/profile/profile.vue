@@ -29,14 +29,14 @@
 		<view class="menu-section">
 			<view class="menu-item">
 				<view class="menu-left">
-					<text class="menu-icon green">🏆</text>
+					<image class="menu-icon-img green" src="/static/icon/medal.png"></image>
 					<text class="menu-text">我的勋章</text>
 				</view>
 				<text class="arrow">›</text>
 			</view>
 			<view class="menu-item" @click="goToCourseSwitch">
 				<view class="menu-left">
-					<text class="menu-icon purple">🔄</text>
+					<image class="menu-icon-img purple" src="/static/icon/switch.png"></image>
 					<text class="menu-text">切换课程</text>
 				</view>
 				<text class="arrow">›</text>
@@ -47,7 +47,7 @@
 		<view class="chart-section">
 			<view class="section-header">
 				<view class="header-left">
-					<text class="chart-icon">📊</text>
+					<image class="chart-icon-img" src="/static/icon/data.png"></image>
 					<text class="section-title">学习数据</text>
 				</view>
 				<text class="total-time">总时长：12.5小时</text>
@@ -110,21 +110,21 @@
 		<view class="menu-section">
 			<view class="menu-item" @click="goToSettings">
 				<view class="menu-left">
-					<text class="menu-icon gray">⚙️</text>
+					<image class="menu-icon-img gray" src="/static/icon/setting.png"></image>
 					<text class="menu-text">设置</text>
 				</view>
 				<text class="arrow">›</text>
 			</view>
 			<view class="menu-item" @click="goToHelpFeedback">
 				<view class="menu-left">
-					<text class="menu-icon gray">💬</text>
+					<image class="menu-icon-img gray" src="/static/icon/help.png"></image>
 					<text class="menu-text">帮助与反馈</text>
 				</view>
 				<text class="arrow">›</text>
 			</view>
 			<view class="menu-item">
 				<view class="menu-left">
-					<text class="menu-icon red">🚪</text>
+					<image class="menu-icon-img red" src="/static/icon/login_out.png"></image>
 					<text class="menu-text danger">退出登录</text>
 				</view>
 				<text class="arrow">›</text>
@@ -256,8 +256,10 @@
 		align-items: center;
 	}
 
-	.menu-icon {
-		font-size: 40rpx;
+	/* 功能菜单图标大小 */
+	.menu-icon-img {
+		width: 36rpx;
+		height: 36rpx;
 		margin-right: 20rpx;
 	}
 
@@ -266,9 +268,6 @@
 		color: #333333;
 	}
 
-	.menu-text.danger {
-		color: #ff4757;
-	}
 
 	.arrow {
 		font-size: 48rpx;
@@ -295,12 +294,15 @@
 		align-items: center;
 	}
 
-	.chart-icon {
-		font-size: 40rpx;
+	/* 图表标题图标大小 */
+	.chart-icon-img {
+		width: 38rpx;
+		height: 38rpx;
 		margin-right: 10rpx;
 	}
 
 	.section-title {
+		display: contents;
 		font-size: 32rpx;
 		font-weight: bold;
 		color: #333333;
