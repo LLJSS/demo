@@ -54,33 +54,21 @@
 			<view class="bind-list">
 				<view class="bind-item">
 					<view class="bind-left">
-<<<<<<< HEAD
-						<text class="bind-icon green">💬</text>
-=======
 						<image class="bind-img" src="/static/icon/weixin.png"></image>
->>>>>>> main
 						<text class="bind-name">微信</text>
 					</view>
 					<text class="bind-status bound">已绑定</text>
 				</view>
 				<view class="bind-item">
 					<view class="bind-left">
-<<<<<<< HEAD
-						<text class="bind-icon blue">🐧</text>
-=======
 						<image class="bind-img" src="/static/icon/QQ.png"></image>
->>>>>>> main
 						<text class="bind-name">QQ</text>
 					</view>
 					<text class="bind-status unbound">去绑定</text>
 				</view>
 				<view class="bind-item" @click="editPhone">
 					<view class="bind-left">
-<<<<<<< HEAD
-						<text class="bind-icon red">📱</text>
-=======
 						<image class="bind-img" src="/static/icon/phone.png"></image>
->>>>>>> main
 						<text class="bind-name">手机号</text>
 					</view>
 					<view class="bind-right">
@@ -293,29 +281,6 @@
 		align-items: center;
 	}
 
-<<<<<<< HEAD
-	.bind-icon {
-		width: 60rpx;
-		height: 60rpx;
-		border-radius: 12rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 30rpx;
-		margin-right: 20rpx;
-	}
-
-	.bind-icon.green {
-		background: #e6fff0;
-	}
-
-	.bind-icon.blue {
-		background: #e6f3ff;
-	}
-
-	.bind-icon.red {
-		background: #ffe6e6;
-=======
 	/* 绑定图标统一尺寸 */
 	.bind-img {
 		width: 40rpx;
@@ -323,7 +288,6 @@
 		object-fit: contain;
 		margin-right: 20rpx;
 		flex-shrink: 0;
->>>>>>> main
 	}
 
 	.bind-name {
@@ -348,8 +312,4 @@
 		color: #999999;
 		margin-right: 10rpx;
 	}
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> main

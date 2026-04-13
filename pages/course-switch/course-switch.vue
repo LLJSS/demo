@@ -12,12 +12,8 @@
 						<view class="progress-bar-fill" :style="{ width: currentCourse.progress + '%' }"></view>
 					</view>
 					<view class="course-stats">
-<<<<<<< HEAD
-						<text class="stat-item">📅 已学习 {{currentCourse.studyTime}}</text>
-=======
 						<image class="stat-icon" src="/static/icon/totle_time.png"></image>
 						<text class="stat-item">已学习 {{currentCourse.studyTime}}</text>
->>>>>>> main
 					</view>
 				</view>
 			</view>
@@ -35,14 +31,10 @@
 							<text class="course-status">{{course.statusText}}</text>
 						</view>
 						<view class="course-detail">
-<<<<<<< HEAD
-							<text class="detail-item">📅 总时长 {{course.totalTime}}</text>
-=======
 							<view class="course-detail-view">
 								<image class="stat-icon" src="/static/icon/totle_time.png"></image>
 								<text class="detail-item"> 总时长 {{course.totalTime}}</text>
 							</view>
->>>>>>> main
 							<view class="switch-btn" @click.stop="switchCourse(course)" v-if="course.id !== currentCourse.id">
 								<text class="switch-text">切换至此课程</text>
 							</view>
@@ -55,11 +47,7 @@
 		<!-- 提示信息 -->
 		<view class="tip-section">
 			<view class="tip-card">
-<<<<<<< HEAD
-				<text class="tip-icon">💡</text>
-=======
 				<image class="tip-icon-img" src="/static/icon/tip.png"></image>
->>>>>>> main
 				<text class="tip-text">切换课程后，之前的学习进度会自动保存，随时可以切换回来继续学习。</text>
 			</view>
 		</view>
@@ -242,10 +230,7 @@
 		height: 240rpx;
 		border-radius: 15rpx;
 		margin-bottom: 20rpx;
-<<<<<<< HEAD
-=======
 		object-fit: cover;
->>>>>>> main
 	}
 
 	.course-info {
@@ -262,14 +247,9 @@
 
 	.course-progress {
 		font-size: 26rpx;
-<<<<<<< HEAD
-		color: #409eff;
-		margin-bottom: 15rpx;
-=======
 		color: #333333;
 		margin-bottom: 15rpx;
 		font-weight: 500;
->>>>>>> main
 	}
 
 	.progress-bar-bg {
@@ -281,11 +261,7 @@
 	}
 
 	.progress-bar-fill {
-<<<<<<< HEAD
-		background: linear-gradient(to right, #409eff, #66b1ff);
-=======
 		background: #4CD964;
->>>>>>> main
 		height: 100%;
 		border-radius: 20rpx;
 		transition: width 0.3s;
@@ -299,8 +275,6 @@
 	.stat-item {
 		font-size: 24rpx;
 		color: #999999;
-<<<<<<< HEAD
-=======
 		line-height: 1;
 	}
 	
@@ -310,7 +284,6 @@
 		height: 26rpx;
 		margin-right: 8rpx;
 		object-fit: contain;
->>>>>>> main
 	}
 
 	/* 全部课程部分 */
@@ -344,10 +317,7 @@
 		margin-right: 20rpx;
 		margin-bottom: 0;
 		flex-shrink: 0;
-<<<<<<< HEAD
-=======
 		object-fit: cover;
->>>>>>> main
 	}
 
 	.course-content {
@@ -384,26 +354,15 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-<<<<<<< HEAD
-=======
 	
 	.course-detail-view{
 		display: flex;
 		align-items: center;
 	}
->>>>>>> main
 
 	.detail-item {
 		font-size: 24rpx;
 		color: #999999;
-<<<<<<< HEAD
-	}
-
-	.switch-btn {
-		background: linear-gradient(to right, #52c41a, #73d13d);
-		padding: 12rpx 25rpx;
-		border-radius: 30rpx;
-=======
 		line-height: 1;
 	}
 
@@ -417,17 +376,13 @@
 		justify-content: center;
 		min-height: 60rpx;
 		box-sizing: border-box;
->>>>>>> main
 	}
 
 	.switch-text {
 		font-size: 24rpx;
 		color: #ffffff;
 		font-weight: bold;
-<<<<<<< HEAD
-=======
 		line-height: 1;
->>>>>>> main
 	}
 
 	/* 提示信息 */
@@ -440,15 +395,6 @@
 		border-radius: 15rpx;
 		padding: 25rpx;
 		display: flex;
-<<<<<<< HEAD
-		align-items: flex-start;
-	}
-
-	.tip-icon {
-		font-size: 32rpx;
-		margin-right: 15rpx;
-		flex-shrink: 0;
-=======
 		align-items: center;
 	}
 
@@ -459,7 +405,6 @@
 		margin-right: 15rpx;
 		flex-shrink: 0;
 		object-fit: contain;
->>>>>>> main
 	}
 
 	.tip-text {
@@ -557,10 +502,7 @@
 		height: 120rpx;
 		border-radius: 15rpx;
 		margin-right: 20rpx;
-<<<<<<< HEAD
-=======
 		object-fit: cover;
->>>>>>> main
 	}
 
 	.preview-info {
@@ -578,11 +520,7 @@
 
 	.preview-progress {
 		font-size: 24rpx;
-<<<<<<< HEAD
-		color: #409eff;
-=======
 		color: #4CD964;
->>>>>>> main
 	}
 
 	.modal-buttons {
@@ -600,26 +538,15 @@
 		padding: 25rpx;
 		border-radius: 50rpx;
 		text-align: center;
-<<<<<<< HEAD
-=======
 		display: flex;
 		align-items: center;
 		justify-content: center;
->>>>>>> main
 	}
 
 	.modal-btn.cancel {
 		background: #f5f5f5;
 	}
 
-<<<<<<< HEAD
-	.modal-btn.confirm {
-		background: linear-gradient(to right, #a855f7, #7c3aed);
-	}
-
-	.modal-btn.primary {
-		background: linear-gradient(to right, #a855f7, #7c3aed);
-=======
 	/* 确认切换按钮 - 渐变 #F97316 -> #EF4444 */
 	.modal-btn.confirm {
 		background: linear-gradient(to right, #F97316, #EF4444);
@@ -628,16 +555,12 @@
 	/* 立即开始学习按钮 - 渐变 #F97316 -> #EF4444 */
 	.modal-btn.primary {
 		background: linear-gradient(to right, #F97316, #EF4444);
->>>>>>> main
 	}
 
 	.btn-text {
 		font-size: 30rpx;
 		font-weight: bold;
-<<<<<<< HEAD
-=======
 		line-height: 1;
->>>>>>> main
 	}
 
 	.cancel-text {
@@ -717,8 +640,4 @@
 		font-size: 26rpx;
 		color: #999999;
 	}
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> main
