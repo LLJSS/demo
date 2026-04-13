@@ -44,9 +44,6 @@
             "style": {
                 "navigationBarTitleText": "切换课程"
             }
-<<<<<<< HEAD
-        }
-=======
         },
 		{
 		    "path": "pages/login/login",
@@ -55,7 +52,6 @@
 				"navigationStyle": "custom"
 		    }
 		}
->>>>>>> main
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
