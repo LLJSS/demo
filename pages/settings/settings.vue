@@ -2,10 +2,10 @@
 	<view class="page">
 		<!-- 用户信息卡片 -->
 		<view class="user-card" @click="goToProfileEdit">
-			<image class="user-avatar" src="/static/avatar.png"></image>
+			<image class="user-avatar" :src="avatarSrc" mode="aspectFill"></image>
 			<view class="user-info">
-				<text class="user-name">编程小天才</text>
-				<text class="user-id">ID: 12345678</text>
+				<text class="user-name">{{ displayName }}</text>
+				<text class="user-id">{{ displayId }}</text>
 			</view>
 			<text class="arrow">›</text>
 		</view>
@@ -77,13 +77,55 @@
 </template>
 
 <script>
+import { getToken, getUserInfo } from '../../utils/auth.js'
+import { BASE_URL } from '../../utils/config.js'
+
 	export default {
 		data() {
 			return {
-				
+				userInfo: {
+					customerName: '编程小天才',
+					customerId: '',
+					avatar: '/static/avatar.png'
+				}
+			}
+		},
+		onShow() {
+			if (!getToken()) {
+				uni.reLaunch({ url: '/pages/login/login' })
+				return
+			}
+			this.syncUserInfo()
+		},
+		computed: {
+			avatarSrc() {
+				return this.resolveAvatarUrl(this.userInfo.avatar)
+			},
+			displayName() {
+				return this.userInfo.customerName || '编程小天才'
+			},
+			displayId() {
+				return this.userInfo.customerId ? `ID: ${this.userInfo.customerId}` : 'ID: --'
 			}
 		},
 		methods: {
+			resolveAvatarUrl(avatar) {
+				if (!avatar || typeof avatar !== 'string') {
+					return '/static/avatar.png'
+				}
+				if (avatar.startsWith('http://') || avatar.startsWith('https://')) {
+					return avatar
+				}
+				if (avatar.startsWith('/')) {
+					const base = (BASE_URL || '').replace(/\/$/, '')
+					return base ? base + avatar : avatar
+				}
+				return '/static/avatar.png'
+			},
+			syncUserInfo() {
+				const info = getUserInfo() || {}
+				this.userInfo = Object.assign({}, this.userInfo, info)
+			},
 			goToProfileEdit() {
 				uni.navigateTo({
 					url: '/pages/profile-edit/profile-edit'

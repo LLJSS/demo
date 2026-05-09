@@ -232,11 +232,20 @@
 </template>
 
 <script>
+import { post } from '../../utils/request.js'
+import {
+    setToken,
+    setUserInfo,
+    hasToken,
+    saveRememberCredentials,
+    clearRememberCredentials,
+    loadRememberCredentials
+} from '../../utils/auth.js'
 export default {
     data() {
         return {
             currentTab: 'login', // login | register
-            loginType: 'code', // code | password
+            loginType: 'password', // code | password，默认密码登录对接后端
             codeCountdown: 0,
             timer: null,
             
@@ -258,6 +267,19 @@ export default {
             },
             showRegPassword: false,
             showConfirmPassword: false
+        }
+    },
+    onLoad() {
+        const remembered = loadRememberCredentials()
+        if (remembered.phone) {
+            this.loginForm.phone = remembered.phone
+            this.loginForm.password = remembered.password
+            this.rememberPwd = true
+        }
+    },
+    onShow() {
+        if (hasToken()) {
+            uni.switchTab({ url: '/pages/index/index' })
         }
     },
     methods: {
@@ -296,8 +318,7 @@ export default {
             }, 1000)
         },
         
-        // 登录
-        handleLogin() {
+        async handleLogin() {
             if (!this.loginForm.phone) {
                 uni.showToast({
                     title: '请输入手机号',
@@ -305,7 +326,7 @@ export default {
                 })
                 return
             }
-            
+
             if (this.loginType === 'code') {
                 if (!this.loginForm.code) {
                     uni.showToast({
@@ -314,28 +335,61 @@ export default {
                     })
                     return
                 }
-            } else {
-                if (!this.loginForm.password) {
+                uni.showToast({ title: '请使用密码登录对接后端', icon: 'none' })
+                return
+            }
+
+            if (!this.loginForm.password) {
+                uni.showToast({
+                    title: '请输入密码',
+                    icon: 'none'
+                })
+                return
+            }
+
+            const phone = this.loginForm.phone.trim()
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                uni.showToast({ title: '请输入正确手机号', icon: 'none' })
+                return
+            }
+
+            uni.showLoading({ title: '登录中', mask: true })
+            try {
+                const res = await post(
+                    '/api/customer/login',
+                    {
+                        loginType: 'password',
+                        telephone: phone,
+                        password: this.loginForm.password
+                    },
+                    { needAuth: false }
+                )
+                uni.hideLoading()
+
+                if (res.code === 200 && res.data && res.data.token) {
+                    setToken(res.data.token)
+                    setUserInfo(res.data)
+                    if (this.rememberPwd) {
+                        saveRememberCredentials(phone, this.loginForm.password)
+                    } else {
+                        clearRememberCredentials()
+                    }
+                    uni.showToast({ title: res.message || '登录成功', icon: 'success' })
+                    setTimeout(() => {
+                        uni.switchTab({ url: '/pages/index/index' })
+                    }, 400)
+                } else {
                     uni.showToast({
-                        title: '请输入密码',
+                        title: res.message || '登录失败',
                         icon: 'none'
                     })
+                }
+            } catch (e) {
+                uni.hideLoading()
+                if (e && e.message === 'unauthorized') {
                     return
                 }
             }
-            
-            // 模拟登录
-            uni.showToast({
-                title: '登录成功',
-                icon: 'success'
-            })
-            
-            setTimeout(() => {
-                // 跳转到首页
-                uni.switchTab({
-                    url: '/pages/index/index'
-                })
-            }, 1500)
         },
         
         // 注册

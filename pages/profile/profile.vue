@@ -1,26 +1,26 @@
 <template>
 	<view class="page">
 		<!-- 顶部用户信息 -->
-		<view class="header">
-			<image class="avatar" src="/static/avatar.png"></image>
-			<text class="username">编程小天才</text>
+		<view class="header" @click="goProfileEdit">
+			<image class="avatar" :src="avatarSrc" mode="aspectFill"></image>
+			<text class="username">{{ displayName }}</text>
 			<view class="level-badge">
-				<text class="level-text">青铜程序员 Lv.3</text>
+				<text class="level-text">{{ levelBadgeText }}</text>
 			</view>
 		</view>
 
 		<!-- 数据统计卡片 -->
 		<view class="stats-card">
 			<view class="stat-item">
-				<text class="stat-value">42</text>
+				<text class="stat-value">{{ studyDaysDisplay }}</text>
 				<text class="stat-label">学习天数</text>
 			</view>
 			<view class="stat-item">
-				<text class="stat-value">1280</text>
+				<text class="stat-value">{{ pointsDisplay }}</text>
 				<text class="stat-label">累积积分</text>
 			</view>
 			<view class="stat-item">
-				<text class="stat-value">36</text>
+				<text class="stat-value">{{ medalsDisplay }}</text>
 				<text class="stat-label">获得勋章</text>
 			</view>
 		</view>
@@ -122,7 +122,7 @@
 				</view>
 				<text class="arrow">›</text>
 			</view>
-			<view class="menu-item">
+			<view class="menu-item" @click="handleLogout">
 				<view class="menu-left">
 					<image class="menu-icon-img red" src="/static/icon/login_out.png"></image>
 					<text class="menu-text danger">退出登录</text>
@@ -134,30 +134,139 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                
-            }
-        },
-        methods: {
-            goToSettings() {
-                uni.navigateTo({
-                    url: '/pages/settings/settings'
-                })
-            },
-            goToHelpFeedback() {
-                uni.navigateTo({
-                    url: '/pages/help-feedback/help-feedback'
-                })
-            },
-            goToCourseSwitch() {
-                uni.navigateTo({
-                    url: '/pages/course-switch/course-switch'
-                })
-            }
-        }
-    }
+import { get } from '../../utils/request.js'
+import { getToken, getUserInfo, setUserInfo, clearAuth } from '../../utils/auth.js'
+import { BASE_URL } from '../../utils/config.js'
+
+export default {
+	data() {
+		return {
+			displayName: '学伴用户',
+			avatarSrc: '/static/avatar.png',
+			pointsDisplay: '0',
+			studyDaysDisplay: '—',
+			medalsDisplay: '—',
+			levelBadgeText: '学伴学员'
+		}
+	},
+	onShow() {
+		if (!getToken()) {
+			uni.reLaunch({ url: '/pages/login/login' })
+			return
+		}
+		this.applyLocalCache()
+		this.refreshProfile()
+	},
+	methods: {
+		applyLocalCache() {
+			const info = getUserInfo()
+			if (info && info.customerName) {
+				this.displayName = info.customerName
+			}
+			if (info && (info.points !== undefined && info.points !== null)) {
+				this.pointsDisplay = String(info.points)
+				this.levelBadgeText = this.buildLevelBadge(info.points)
+			}
+			this.avatarSrc = this.resolveAvatarUrl(info && info.avatar)
+		},
+		resolveAvatarUrl(avatar) {
+			if (!avatar || typeof avatar !== 'string') {
+				return '/static/avatar.png'
+			}
+			if (avatar.startsWith('http://') || avatar.startsWith('https://')) {
+				return avatar
+			}
+			if (avatar.startsWith('/api/customer/avatar/')) {
+				const base = (BASE_URL || '').replace(/\/$/, '')
+				return base ? base + avatar : avatar
+			}
+			if (avatar.startsWith('/')) {
+				const base = (BASE_URL || '').replace(/\/$/, '')
+				return base ? base + avatar : avatar
+			}
+			return '/static/avatar.png'
+		},
+		buildLevelBadge(points) {
+			const p = Number(points) || 0
+			let tier = '青铜程序员'
+			let lv = 1
+			if (p >= 500) {
+				tier = '黄金程序员'
+				lv = Math.min(5, 3 + Math.floor((p - 500) / 300))
+			} else if (p >= 200) {
+				tier = '白银程序员'
+				lv = Math.min(3, 2 + Math.floor((p - 200) / 150))
+			} else if (p >= 50) {
+				tier = '青铜程序员'
+				lv = 2 + Math.floor((p - 50) / 75)
+			}
+			return `${tier} Lv.${lv}`
+		},
+		async refreshProfile() {
+			try {
+				const res = await get('/api/customer/info', {}, { needAuth: true })
+				if (res.code === 200 && res.data) {
+					const d = res.data
+					if (d.customerName) {
+						this.displayName = d.customerName
+					}
+					if (d.points !== undefined && d.points !== null) {
+						this.pointsDisplay = String(d.points)
+						this.levelBadgeText = this.buildLevelBadge(d.points)
+					}
+					this.avatarSrc = this.resolveAvatarUrl(d.avatar)
+					setUserInfo(Object.assign({}, getUserInfo(), d))
+				}
+			} catch (e) {
+				if (e && e.message === 'unauthorized') {
+					return
+				}
+			}
+			try {
+				const medalRes = await get('/api/medal/query', {}, { needAuth: true })
+				if (medalRes.code === 200 && medalRes.data && medalRes.data.totalBadge !== undefined) {
+					this.medalsDisplay = String(medalRes.data.totalBadge)
+				} else {
+					this.medalsDisplay = '0'
+				}
+			} catch (e) {
+				this.medalsDisplay = '0'
+			}
+		},
+		handleLogout() {
+			uni.showModal({
+				title: '提示',
+				content: '确定退出登录？',
+				success: (res) => {
+					if (res.confirm) {
+						clearAuth()
+						uni.reLaunch({ url: '/pages/login/login' })
+					}
+				}
+			})
+		},
+		goToSettings() {
+			uni.navigateTo({
+				url: '/pages/settings/settings'
+			})
+		},
+		goToHelpFeedback() {
+			uni.navigateTo({
+				url: '/pages/help-feedback/help-feedback'
+			})
+		},
+		goToCourseSwitch() {
+			uni.navigateTo({
+				url: '/pages/course-switch/course-switch'
+			})
+		},
+		goProfileEdit() {
+			uni.navigateTo({
+				url: '/pages/profile-edit/profile-edit'
+			})
+		}
+	}
+}
 </script>
 
 <style>
@@ -268,6 +377,9 @@
 		color: #333333;
 	}
 
+	.menu-text.danger {
+		color: #e64340;
+	}
 
 	.arrow {
 		font-size: 48rpx;

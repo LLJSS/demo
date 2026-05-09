@@ -2,11 +2,11 @@
     <view class="home-page">
         <!-- 用户信息卡片 -->
         <view class="user-card">
-            <image class="avatar" src="/static/logo.png" mode="aspectFill"></image>
+            <image class="avatar" :src="avatarSrc" mode="aspectFill"></image>
             
             <view class="user-info">
                 <view class="name-level">
-                    <text class="username">编程小天才</text>
+                    <text class="username">{{ displayName }}</text>
                     <text class="level-text">Lv.4</text>
                 </view>
 
@@ -24,7 +24,7 @@
                     <view class="score-card">
                         <image class="score-icon-image" src="/static/icon/integral.png"></image>
 						<text class="score-icon-text">积分:</text>
-                        <text class="score-text">{{ userScore }}</text>
+                        <text class="score-text">{{ displayPoints }}</text>
                     </view>
                 </view>
             </view>
@@ -107,11 +107,17 @@
 </template>
 
 <script>
+import { getToken, getUserInfo } from '../../utils/auth.js'
+import { BASE_URL } from '../../utils/config.js'
+
 export default {
     data() {
         return {
             hasBoundRobot: false,
-            userScore: 1688,
+            displayName: '编程小天才',
+            displayPoints: 0,
+            avatarSrc: '/static/logo.png',
+            userScore: 0,
             currentExp: 280,
             totalExp: 500,
             expPercent: 56,
@@ -119,7 +125,35 @@ export default {
             snCode: ''
         }
     },
+    onShow() {
+        if (!getToken()) {
+            uni.reLaunch({ url: '/pages/login/login' })
+            return
+        }
+        this.applyUserFromStorage()
+    },
     methods: {
+        applyUserFromStorage() {
+            const info = getUserInfo()
+            if (info.customerName) {
+                this.displayName = info.customerName
+            }
+            if (info.points !== undefined && info.points !== null) {
+                this.displayPoints = info.points
+                this.userScore = info.points
+            }
+            const av = info.avatar
+            if (av && typeof av === 'string') {
+                if (av.startsWith('http://') || av.startsWith('https://')) {
+                    this.avatarSrc = av
+                } else if (av.startsWith('/')) {
+                    const base = BASE_URL || ''
+                    this.avatarSrc = base ? base.replace(/\/$/, '') + av : av
+                }
+            } else {
+                this.avatarSrc = '/static/logo.png'
+            }
+        },
         openSnModal() {
             this.showSnModal = true
             this.snCode = ''

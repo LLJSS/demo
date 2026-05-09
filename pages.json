@@ -1,5 +1,12 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+		},
 		{
 			"path": "pages/index/index",
 			"style": {
@@ -8,49 +15,42 @@
 			}
 		},
 		{
-            "path": "pages/study/study",
-            "style": {
-                "navigationBarTitleText": "学习中心",
+			"path": "pages/study/study",
+			"style": {
+				"navigationBarTitleText": "学习中心",
 				"navigationStyle": "custom"
-            }
-        },
-        {
-            "path": "pages/profile/profile",
-            "style": {
-                "navigationBarTitleText": "个人中心",
-				"navigationStyle": "custom"
-            }
-        },
-        {
-            "path": "pages/settings/settings",
-            "style": {
-                "navigationBarTitleText": "设置"
-            }
-        },
-        {
-            "path": "pages/profile-edit/profile-edit",
-            "style": {
-                "navigationBarTitleText": "个人信息"
-            }
-        },
-        {
-            "path": "pages/help-feedback/help-feedback",
-            "style": {
-                "navigationBarTitleText": "帮助与反馈"
-            }
-        },
-        {
-            "path": "pages/course-switch/course-switch",
-            "style": {
-                "navigationBarTitleText": "切换课程"
-            }
-        },
+			}
+		},
 		{
-		    "path": "pages/login/login",
-		    "style": {
-		        "navigationBarTitleText": "登录页面",
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationBarTitleText": "个人中心",
 				"navigationStyle": "custom"
-		    }
+			}
+		},
+		{
+			"path": "pages/settings/settings",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+		{
+			"path": "pages/profile-edit/profile-edit",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		},
+		{
+			"path": "pages/help-feedback/help-feedback",
+			"style": {
+				"navigationBarTitleText": "帮助与反馈"
+			}
+		},
+		{
+			"path": "pages/course-switch/course-switch",
+			"style": {
+				"navigationBarTitleText": "切换课程"
+			}
 		}
 	],
 	"globalStyle": {
@@ -60,30 +60,30 @@
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
-	    "color": "#333333",
-	    "selectedColor": "#f97361",
-	    "borderStyle": "black",
-	    "backgroundColor": "#ffffff",
-	    "list": [
-	        {
-	            "pagePath": "pages/study/study",
-	            "text": "学习中心",
-	            "iconPath": "static/tabbar/study.png",
-	            "selectedIconPath": "static/tabbar/study-active.png"
-	        },
-	        {
-	            "pagePath": "pages/index/index",
-	            "text": "首页",
-	            "iconPath": "static/tabbar/home.png",
-	            "selectedIconPath": "static/tabbar/home-active.png"
-	        },
-	        {
-	            "pagePath": "pages/profile/profile",
-	            "text": "个人中心",
-	            "iconPath": "static/tabbar/profile.png",
-	            "selectedIconPath": "static/tabbar/profile-active.png"
-	        }
-	    ]
+		"color": "#333333",
+		"selectedColor": "#f97361",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/study/study",
+				"text": "学习中心",
+				"iconPath": "static/tabbar/study.png",
+				"selectedIconPath": "static/tabbar/study-active.png"
+			},
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home-active.png"
+			},
+			{
+				"pagePath": "pages/profile/profile",
+				"text": "个人中心",
+				"iconPath": "static/tabbar/profile.png",
+				"selectedIconPath": "static/tabbar/profile-active.png"
+			}
+		]
 	},
 	"uniIdRouter": {}
 }
